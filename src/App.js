@@ -1,9 +1,7 @@
-import './App.css';
 import Display from "./Display.js";
 import Options from "./Options.js";
-import STUDENTS from "./students copy.json"
+import STUDENTS from "./studdata/merged1.json"
 import React, {useState} from "react";
-import Button from "@mui/material/Button";
 
 
 function App(props) {
@@ -16,9 +14,8 @@ function App(props) {
 			if (query.gender !== "") {
 				ret = ret && (st.g === query.gender);
 			}
-			if (query.text.length > 2)
+			if (query.text.length > 0)
 				ret = ret && (st.n.includes(query.text));
-			else return false;
 			
 			return ret;
 		}))
