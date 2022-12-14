@@ -7,21 +7,34 @@ import React, {useState} from "react";
 import {DarkModeSharp, LightModeRounded} from "@mui/icons-material";
 
 
+function rollToYear(roll) {
+	if ((roll[0] === "Y") && (roll[1]) > "7") {
+		return roll.slice(0,2);
+	} else if (roll.slice(0,2) < '30') {
+		return "Y" + roll.slice(0,2);
+	} else return "Other";
+}
+
 function App(props) {
 	
 	const [students, setStudents] = useState([]);
 	const [darkMode, setDark] = useState(true);
 	
 	function sendQuery(query) {
-		console.log(query)
+		console.log(query);
 		setStudents(STUDENTS.filter((st) => {
 			let ret = true;
-			if (query.gender !== "") {
-				ret = ret && (st.g === query.gender);
+			for (const key in query) {
+				if (query[key].length > 0) { //all the stuff inside the if statement will only narrow it down because && used so can just not do anything to ret if length is 0
+					if (typeof(query[key]) === "string") { //gender, hometown or name
+						ret = ret && (st[key[0]].toLowerCase().includes(query[key].toLowerCase()));
+					} else if (key === "batch") {
+						ret = ret && (query.batch.includes(rollToYear(st.i)));
+					} else { //all the other stuff
+						ret = ret && (query[key].includes(st[key[0]]));
+					}
+				}
 			}
-			if (query.text.length > 0)
-				ret = ret && (st.n.toLowerCase().includes(query.text.toLowerCase()));
-			
 			return ret;
 		}))
 	}

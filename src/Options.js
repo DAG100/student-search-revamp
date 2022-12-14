@@ -22,64 +22,37 @@ rest: text field
 */
 
 function Options(props) {
-	const [batch, setBatch] = useState([]);
-	const [gender, setGender] = useState("");
-	const [text, setText] = useState("");
 	const [query, setQuery] = useState({
 		gender:"",
-		text:"",
-		batch:[]
+		name:"",
+		batch:[],
+		hall:[],
+		prog:[],
+		dept:[],
+		bloodgrp:[],
+		address:""
 	});
 	
-
 	return (
 		<Paper className="options">
-
-			<FormControl variant="filled">
-				<InputLabel id="batch-label">Batch</InputLabel>
-				<Select
-					labelId="batch-label"
-					className="field"
-					value={query.batch}
-					multiple
-					onChange={(event) => {
-						setQuery(Object.assign(query,{batch:event.target.value}));
-						props.sendQuery({batch:event.target.value, gender, text});
-					}}
-				>
-					<MenuItem value="20">Y20</MenuItem>
-					<MenuItem value="21">Y21</MenuItem>
-				</Select>
-			</FormControl>
-			
-				
-			<FormControl variant="filled">
-				<InputLabel id="batch-label">Batch</InputLabel>
-				<Select
-					labelId="batch-label"
-					className="field"
-					value={batch}
-					multiple
-					onChange={(event) => {
-						setBatch(event.target.value);
-						props.sendQuery({batch:event.target.value, gender, text});
-					}}
-				>
-					<MenuItem value="20">Y20</MenuItem>
-					<MenuItem value="21">Y21</MenuItem>
-				</Select>
-			</FormControl>
-			
+		
+			<MultiSelectField 
+				query={query}
+				name="batch"
+				options={["Y20","Y21"]}
+				setQuery={setQuery}
+				sendQuery={props.sendQuery}
+			/>
 
 			<FormControl variant="filled">
 				<InputLabel id="gender-label">Gender</InputLabel>
 				<Select
 					className="field"
 					labelId="gender-label"
-					value={gender}
+					value={query.gender}
 					onChange={(event) => {
-						setGender(event.target.value);
-						props.sendQuery({batch, gender:event.target.value, text});
+						setQuery(Object.assign(query,{gender:event.target.value}));
+						props.sendQuery(Object.assign(query,{gender:event.target.value}));
 					}}
 				>
 					<MenuItem value="">Any</MenuItem>
@@ -88,15 +61,58 @@ function Options(props) {
 				</Select>
 			</FormControl>
 
+			<MultiSelectField 
+				query={query}
+				name="hall"
+				options={["HALL1","HALL2"]}
+				setQuery={setQuery}
+				sendQuery={props.sendQuery}
+			/>
+			
+			<MultiSelectField 
+				query={query}
+				name="prog"
+				options={["BTech","MT(Dual)"]}
+				setQuery={setQuery}
+				sendQuery={props.sendQuery}
+			/>
+			
+			<MultiSelectField 
+				query={query}
+				name="dept"
+				options={["Computer Science & Engg.","Chemistry"]}
+				setQuery={setQuery}
+				sendQuery={props.sendQuery}
+			/>
+			
+			<MultiSelectField 
+				query={query}
+				name="bloodgrp"
+				options={["A+","B+"]}
+				setQuery={setQuery}
+				sendQuery={props.sendQuery}
+			/>
+			
+			<FormControl variant="filled">
+				<TextField
+					className="field home"
+					label="Hometown"
+					value={query.address}
+					onChange={(event) => {
+						setQuery(Object.assign(query,{address:event.target.value}));
+						props.sendQuery(Object.assign(query,{address:event.target.value}));
+					}}
+				/>
+			</FormControl>
 			
 			<FormControl variant="filled">
 				<TextField
 					className="field main-text"
 					label="Enter name, username or roll no."
-					value={text}
+					value={query.name}
 					onChange={(event) => {
-						setText(event.target.value);
-						props.sendQuery({batch, gender, text:event.target.value});
+						setQuery(Object.assign(query,{name:event.target.value}));
+						props.sendQuery(Object.assign(query,{name:event.target.value}));
 					}}
 				/>
 			</FormControl>
