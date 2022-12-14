@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {InputLabel, TextField, Select, MenuItem, Paper, FormControl} from "@mui/material"
 import MultiSelectField from "./msf.js";
+import {data as listOpts} from "./parseData.js";
 
 
 /* options to include:
@@ -39,7 +40,7 @@ function Options(props) {
 			<MultiSelectField 
 				query={query}
 				name="batch"
-				options={["Y20","Y21"]}
+				options={listOpts.batch}
 				setQuery={setQuery}
 				sendQuery={props.sendQuery}
 			/>
@@ -64,7 +65,7 @@ function Options(props) {
 			<MultiSelectField 
 				query={query}
 				name="hall"
-				options={["HALL1","HALL2"]}
+				options={listOpts.hall}
 				setQuery={setQuery}
 				sendQuery={props.sendQuery}
 			/>
@@ -72,7 +73,7 @@ function Options(props) {
 			<MultiSelectField 
 				query={query}
 				name="prog"
-				options={["BTech","MT(Dual)"]}
+				options={listOpts.prog}
 				setQuery={setQuery}
 				sendQuery={props.sendQuery}
 			/>
@@ -80,7 +81,7 @@ function Options(props) {
 			<MultiSelectField 
 				query={query}
 				name="dept"
-				options={["Computer Science & Engg.","Chemistry"]}
+				options={listOpts.dept}
 				setQuery={setQuery}
 				sendQuery={props.sendQuery}
 			/>
@@ -88,7 +89,7 @@ function Options(props) {
 			<MultiSelectField 
 				query={query}
 				name="bloodgrp"
-				options={["A+","B+"]}
+				options={listOpts.bloodgrp}
 				setQuery={setQuery}
 				sendQuery={props.sendQuery}
 			/>

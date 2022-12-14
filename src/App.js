@@ -5,15 +5,7 @@ import {ThemeProvider,createTheme} from "@mui/material/styles";
 import Fab from "@mui/material/Fab"
 import React, {useState} from "react";
 import {DarkModeSharp, LightModeRounded} from "@mui/icons-material";
-
-
-function rollToYear(roll) {
-	if ((roll[0] === "Y") && (roll[1]) > "7") {
-		return roll.slice(0,2);
-	} else if (roll.slice(0,2) < '30') {
-		return "Y" + roll.slice(0,2);
-	} else return "Other";
-}
+import {rollToYear} from "./parseData.js";
 
 function App(props) {
 	
