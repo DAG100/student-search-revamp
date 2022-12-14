@@ -1,15 +1,15 @@
 body {
-	background-color:#efefef;
+	background-color:#000;
 }
 
 .options {
 	width: 80%;
 	max-width: 500px;
 	margin: auto;
-	border: 1px solid;
+	padding:10px;
 }
 
-.options > * {
+.options * {
 	margin: 10px;
 	
 }
