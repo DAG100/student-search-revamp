@@ -1,4 +1,5 @@
 import Card from "@mui/material/Card";
+import SCard from "./SCard.js";
 import React, {useState, useEffect} from "react";
 
 /*
@@ -14,11 +15,16 @@ function Display(props) {
 	
 	const students = props.toShow.map(el => {
 		return (
-			<Card key={el.i}>
-			Name: {el.n}
-			<br />
-			Department: {el.d}
-			</Card>
+			<div
+				key={el.i}
+				onClick={() => {props.displayCard(el)}}
+			>
+			<SCard 
+				data={el} 
+				displayCard={props.displayCard}
+				pointer={true}
+			/>
+			</div>
 	);});
 	
 	function infiniteScrollImplementation() {
@@ -32,7 +38,7 @@ function Display(props) {
 		return () => {window.removeEventListener("scroll", infiniteScrollImplementation)}
 	});
 	
-	useEffect(() => {setPos(50)},[props.toShow]); //reset pos to 50 if new search
+	useEffect(() => {setPos(50)},[props.toShow]); //reset pos to 50 if new search (i.e. if new props received)
 	return (
 		<div>
 			<div id="count"><Card>{students.length} results found</Card></div>

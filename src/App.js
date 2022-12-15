@@ -6,11 +6,14 @@ import Fab from "@mui/material/Fab"
 import React, {useState} from "react";
 import {DarkModeSharp, LightModeRounded} from "@mui/icons-material";
 import {rollToYear} from "./parseData.js";
+import Overlay from "./Overlay.js";
+import SCard from "./SCard.js";
 
 function App(props) {
 	
 	const [students, setStudents] = useState([]);
 	const [darkMode, setDark] = useState(true);
+	const [currDisp, setCurr] = useState();
 	function sendQuery(query) {
 		setStudents(STUDENTS.filter((st) => {
 			let ret = true;
@@ -29,6 +32,13 @@ function App(props) {
 		}));
 	}
 	
+	function displayCard(student) {
+		setCurr(student);
+	}
+	
+	function clearOverlay() {
+		setCurr(undefined);
+	}
 	
 	return (
   	<div>
@@ -64,7 +74,15 @@ function App(props) {
     	<br />
     	<Display 
     		toShow={students}
+    		displayCard={displayCard}
     	/>
+    	<Overlay
+    		clearOverlay={clearOverlay}
+    	>
+    	{currDisp !== undefined
+    		? <SCard data={currDisp} />
+    		: ""}
+    	</Overlay>
     	</ThemeProvider>
     </div>
   );
