@@ -11,9 +11,7 @@ function App(props) {
 	
 	const [students, setStudents] = useState([]);
 	const [darkMode, setDark] = useState(true);
-	
 	function sendQuery(query) {
-		console.log(query);
 		setStudents(STUDENTS.filter((st) => {
 			let ret = true;
 			for (const key in query) {
@@ -28,7 +26,7 @@ function App(props) {
 				}
 			}
 			return ret;
-		}))
+		}));
 	}
 	
 	
@@ -45,7 +43,6 @@ function App(props) {
 			})
   		}>
   		<Fab
-  			color="default"
   			style={{
   				margin:"10px",
   				position:"fixed"
@@ -64,6 +61,7 @@ function App(props) {
     	<Options 
     		sendQuery={sendQuery}
     	/>
+    	<br />
     	<Display 
     		toShow={students}
     	/>

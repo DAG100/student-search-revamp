@@ -26,6 +26,7 @@ body {
 	width:80%;
 	margin: auto;
 	display:flex;
+	justify-content:space-evenly;
 	flex-wrap:wrap;
 }
 
@@ -34,4 +35,13 @@ body {
 	height: 300px;
 	width: 240px;
 	padding:10px;
+}
+
+#count {
+	display:flex;
+	justify-content:space-evenly;
+}
+
+#count * {
+	padding: 10px;
 }
