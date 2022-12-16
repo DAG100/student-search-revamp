@@ -1,4 +1,4 @@
-import STUDENTS from "./studdata/merged1.json";
+import STUDENTS from "./student_data_getter.js";
 
 function rollToYear(roll) {
 	if ((roll[0] === "Y") && (roll[1]) > "7") {

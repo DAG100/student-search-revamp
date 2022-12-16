@@ -1,19 +1,27 @@
 import Display from "./Display.js";
 import Options from "./Options.js";
-import STUDENTS from "./studdata/merged1.json";
+import STUDENTS from "./student_data_getter.js";
 import {ThemeProvider,createTheme} from "@mui/material/styles";
 import Fab from "@mui/material/Fab"
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {DarkModeSharp, LightModeRounded} from "@mui/icons-material";
 import {rollToYear} from "./parseData.js";
 import Overlay from "./Overlay.js";
 import SCard from "./SCard.js";
 
 function App(props) {
-	
 	const [students, setStudents] = useState([]);
-	const [darkMode, setDark] = useState(true);
+	const [darkMode, setDark] = useState(localStorage.getItem("darkmode") !== "false");
 	const [currDisp, setCurr] = useState();
+	
+	useEffect(() => {
+		if (darkMode) {
+			document.body.style.backgroundColor = "#000";
+		} else {
+			document.body.style.backgroundColor = "#efefef";
+		}
+	})
+	
 	function sendQuery(query) {
 		setStudents(STUDENTS.filter((st) => {
 			let ret = true;
@@ -42,8 +50,8 @@ function App(props) {
 	
 	return (
   	<div>
-  		<ThemeProvider theme={darkMode ? 
-			createTheme({
+  		<ThemeProvider theme={darkMode 
+			? createTheme({
 				palette:{
 					mode: "dark",
 				}
@@ -60,6 +68,7 @@ function App(props) {
   			variant="contained"
   			onClick={()=>{
   				setDark(!darkMode);
+  				localStorage.setItem("darkmode", !darkMode);
   				document.body.style.backgroundColor= darkMode ?
   					"#efefef"
   					: "#000";	
