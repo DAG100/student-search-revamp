@@ -7,7 +7,7 @@ import React, {useState, useEffect} from "react";
 import {DarkModeSharp, LightModeRounded} from "@mui/icons-material";
 import {rollToYear} from "./parseData.js";
 import Overlay from "./Overlay.js";
-import SCard from "./SCard.js";
+import TreeCard from "./treeSCard.js";
 
 function App(props) {
 	const [students, setStudents] = useState([]);
@@ -22,8 +22,8 @@ function App(props) {
 		}
 	})
 	
-	function sendQuery(query) {
-		setStudents(STUDENTS.filter((st) => {
+	function doQuery(query) {
+		return STUDENTS.filter((st) => {
 			let ret = true;
 			for (const key in query) {
 				if (query[key].length > 0) { //all the stuff inside the if statement will only narrow it down because && used so can just not do anything to ret if length is 0
@@ -37,11 +37,23 @@ function App(props) {
 				}
 			}
 			return ret;
-		}));
+		});
+	}
+	
+	function sendQuery(query) {
+		setStudents(doQuery(query));
 	}
 	
 	function displayCard(student) {
-		setCurr(student);
+		clearOverlay();
+		setCurr(<TreeCard 
+			data={student}
+			baapu={STUDENTS.filter((st) => (st.i === student.s))[0] /*TreeCard'll handle undefined*/}
+			bacchas={doQuery({
+				i:student.c //an array -> setQuery will check if roll number included - even if this is "Not Available", will just return an empty array
+			})}
+			displayCard={displayCard}
+		/>);
 	}
 	
 	function clearOverlay() {
@@ -89,7 +101,7 @@ function App(props) {
     		clearOverlay={clearOverlay}
     	>
     	{currDisp !== undefined
-    		? <SCard data={currDisp} />
+    		? currDisp
     		: ""}
     	</Overlay>
     	</ThemeProvider>

@@ -11,11 +11,14 @@ function SCard(props) {
 		style={ props.pointer 
 			? {cursor:"pointer"}
 			: {}}
+		onClick={props.onClick}
 	>
 		<p>{props.data.n}</p>
 		<p>{props.data.i}</p>
 		<p>{props.data.g === "M" ? "Male" : "Female"}</p>
 		<p>Dept.:{props.data.d}</p>
+		<p>Baapu roll number: {props.data.s}</p>
+		{props.children}
 	</Card>);
 }
 
