@@ -11,7 +11,7 @@ import TreeCard from "./treeSCard.js";
 
 function App(props) {
 	const [students, setStudents] = useState([]);
-	const [darkMode, setDark] = useState(localStorage.getItem("darkmode") !== "false");
+	const [darkMode, setDark] = useState(true);
 	const [currDisp, setCurr] = useState();
 	
 	useEffect(() => {
